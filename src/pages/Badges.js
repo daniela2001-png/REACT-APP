@@ -1,77 +1,80 @@
-import React from 'react'
-import Navbar from '../components/Navbar'
-import './styles/Badges.css'
-import logotipo from '../images/badge-header.svg'
-import BadgesList from '../components/BadgeList'
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+import './styles/Badges.css';
+import confLogo from '../images/head.svg';
+import BadgesList from '../components/BadgesList';
+import PageLoading from '../components/PageLoading';
+import PageError from '../components/PageError';
+import MiniLoader from '../components/MiniLoader';
+import api from '../api';
 
 class Badges extends React.Component {
     state = {
-        data: [
-            {
-                "id": '234567890',
-                "firstName": 'Daniela',
-                "lastName": 'Morales',
-                "email": 'dmbmora@outlook.com',
-                "jobTitle": 'developer',
-                "twitter": '@dani_mb',
-                "avatarUrl": 'https://gravatar.com/avatar/4179233abd351b585c9eaa91b4e0eb47?s=400&d=retro&r=x',
-            },
-            {
-                "id": '23456789067890',
-                "firstName": 'Daniel',
-                "lastName": 'Mora',
-                "email": 'dmbmora123@outlook.com',
-                "jobTitle": 'developer',
-                "twitter": '@daniel_mb',
-                "avatarUrl": 'https://gravatar.com/avatar/feed41497fc1beb087d48410dd39cb12?s=400&d=identicon&r=x',
-            },
-            {
-                "id": '234567890678906789',
-                "firstName": 'Dylan',
-                "lastName": 'Morros',
-                "email": 'dmbmora123ert@outlook.com',
-                "jobTitle": 'developer expert',
-                "twitter": '@dylan_mb',
-                "avatarUrl": 'https://gravatar.com/avatar/feed41497fc1beb087d48410dd39cb12?s=400&d=identicon&r=x',
+        loading: true,
+        error: null,
+        data: undefined,
+    };
 
-            },
-            {
-                "id": '23456789067890456789',
-                "firstName": 'Dana',
-                "lastName": 'Mora',
-                "email": 'dmbmora123345@outlook.com',
-                "jobTitle": 'developer full stack',
-                "twitter": '@dana_mb',
-                "avatarUrl": 'https://gravatar.com/avatar/feed41497fc1beb087d48410dd39cb12?s=400&d=identicon&r=x',
+    componentDidMount() {
+        this.fetchData();
 
-            },
-        ]
+        this.intervalId = setInterval(this.fetchData, 5000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.intervalId);
+    }
+
+    fetchData = async () => {
+        this.setState({ loading: true, error: null });
+
+        try {
+            const data = await api.badges.list();
+            this.setState({ loading: false, data: data });
+        } catch (error) {
+            this.setState({ loading: false, error: error });
+        }
     };
 
     render() {
+        if (this.state.loading === true && !this.state.data) {
+            return <PageLoading />;
+        }
+
+        if (this.state.error) {
+            return <PageError error={this.state.error} />;
+        }
+
         return (
-            <div>
-                <Navbar />
-                <div className='Badges'>
-                    <div className='Badges__hero'>
-                        <div className='Badges__container'>
-                            <img className='Badges_conf-logo' src={logotipo} alt='conf_logo'></img>
+            <React.Fragment>
+                <div className="Badges">
+                    <div className="Badges__hero">
+                        <div className="Badges__container">
+                            <img
+                                className="Badges_conf-logo"
+                                src={confLogo}
+                                alt="Conf Logo"
+                                width='300px'
+                            />
                         </div>
                     </div>
                 </div>
-                <div className='Badges__container'>
-                    <div className='Badges__buttons'>
-                        <a href='/badges/new' className='btn btn-primary'>New Badge</a>
+
+                <div className="Badges__container">
+                    <div className="Badges__buttons">
+                        <Link to="/badges/new" className="btn btn-primary">
+                            New Badge
+            </Link>
                     </div>
+
+                    <BadgesList badges={this.state.data} />
+
+                    {this.state.loading && <MiniLoader />}
                 </div>
-                <div className='BadgesList'>
-                    <div className='Badges__container'>
-                        <BadgesList badges={this.state.data}></BadgesList>
-                    </div>
-                </div>
-            </div>
+            </React.Fragment>
         );
     }
-};
+}
 
 export default Badges;
