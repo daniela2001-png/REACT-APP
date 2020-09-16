@@ -1,0 +1,23 @@
+{
+  "main.css": "/static/css/main.0f4b1b22.chunk.css",
+  "main.js": "/static/js/main.8727de9b.chunk.js",
+  "main.js.map": "/static/js/main.8727de9b.chunk.js.map",
+  "runtime~main.js": "/static/js/runtime~main.fdfcfda2.js",
+  "runtime~main.js.map": "/static/js/runtime~main.fdfcfda2.js.map",
+  "static/css/2.5b139b9e.chunk.css": "/static/css/2.5b139b9e.chunk.css",
+  "static/js/2.f1e7d541.chunk.js": "/static/js/2.f1e7d541.chunk.js",
+  "static/js/2.f1e7d541.chunk.js.map": "/static/js/2.f1e7d541.chunk.js.map",
+  "index.html": "/index.html",
+  "precache-manifest.01f6665e561bf50c134a1d845c330fd2.js": "/precache-manifest.01f6665e561bf50c134a1d845c330fd2.js",
+  "service-worker.js": "/service-worker.js",
+  "static/css/2.5b139b9e.chunk.css.map": "/static/css/2.5b139b9e.chunk.css.map",
+  "static/css/main.0f4b1b22.chunk.css.map": "/static/css/main.0f4b1b22.chunk.css.map",
+  "static/media/badge-header.svg": "/static/media/badge-header.973f5842.svg",
+  "static/media/fuera.svg": "/static/media/fuera.78c72ec3.svg",
+  "static/media/head.svg": "/static/media/head.c872445b.svg",
+  "static/media/hola.svg": "/static/media/hola.eeaf2b99.svg",
+  "static/media/logo.svg": "/static/media/logo.0026b862.svg",
+  "static/media/platziconf-logo.svg": "/static/media/platziconf-logo.f246f5f1.svg",
+  "static/media/BadgeEdit.css": "/static/media/stars.1d17360a.svg",
+  "static/media/user.svg": "/static/media/user.1c970287.svg"
+}
